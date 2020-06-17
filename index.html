@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+        </header>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let APP_LOG_LIFECYCLE_EVENTC = true;
+        let webstore = new Vue({
+            el: '#app',
+            data: {
+                sitename: 'Vue.js Pet Depot'
+            },
+            beforeCreate() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('beforeCreate')
+                }
+            },
+            created() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('created')
+                }
+            },
+            beforeMount() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('beforeMount')
+                }
+            },
+            mounted() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('mounted')
+                }
+            },
+            beforeUpdate() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('beforeUpdate')
+                }
+            },
+            updated() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('update')
+                }
+            },
+            beforeDestroy() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('beforeDestroy')
+                }
+            },
+            destroyed() {
+                if(APP_LOG_LIFECYCLE_EVENTC) {
+                    console.log('destroyed')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
