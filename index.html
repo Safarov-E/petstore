@@ -10,7 +10,14 @@
 <body>
     <div id="app">
         <header>
-            <h1 v-text="sitename"></h1>
+           <div class="navbar navbar-default">
+               <h1>{{ sitename }}</h1>
+           </div>
+           <div class="nav navbar-nav navbar-rigth cart">
+               <span
+                    class="glyphicon glyphicon-shopping-cart">
+                    {{ cartItemCount }}</span>
+           </div>
         </header>
         <main>
             <div class="row product">
@@ -70,6 +77,11 @@
             methods: {
                 addToCart() {
                     this.cart.push(this.product.id)
+                }
+            },
+            computed: {
+                cartItemCount() {
+                    return this.cart.length || ''
                 }
             }
         })
