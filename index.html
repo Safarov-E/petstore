@@ -25,6 +25,10 @@
                     <p class="price">
                         {{ product.price | formatPrice}}
                     </p>
+                    <button class="default"
+                        @click="addToCart">
+                        Add to cart
+                    </button>
                 </div>
             </div>
         </main>
@@ -43,7 +47,8 @@
                     description: "А 25 pound bag of <em>irresistiЬle</em>,"+"organic goodness for your cat.",
                     price: 2000,
                     image: "assets/images/product-fullsize.png"
-                }
+                },
+                cart: []
             },
             filters: {
                 formatPrice: function(price) {
@@ -60,6 +65,11 @@
                     } else {
                         return "$" + (price / 100).toFixed(2)
                     }
+                }
+            },
+            methods: {
+                addToCart() {
+                    this.cart.push(this.product.id)
                 }
             }
         })
