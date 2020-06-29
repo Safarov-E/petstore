@@ -54,6 +54,10 @@
                         <span class="inventory-message"
                               v-else>Buy Now!
                         </span>
+                        <div class="rating">
+                          <span v-bind:class="{'rating-active': checkRating(n)}"
+                                v-for="n in 5">☆</span>
+                        </div>
                     </div>
                 </div>
                 <div v-else>
@@ -194,7 +198,8 @@
                     description: "А 25 pound bag of <em>irresistiЬle</em>,"+"organic goodness for your cat.",
                     price: 2000,
                     image: "assets/images/product-fullsize.png",
-                    availableInventory: 10
+                    availableInventory: 10,
+                    rating: 3
                 },
                 cart: []
             },
@@ -224,6 +229,9 @@
                 },
                 submitForm() {
                   alert("Submitted");
+                },
+                checkRating(n) {
+                  return this.product.rating - n >= 0;
                 }
             },
             computed: {
