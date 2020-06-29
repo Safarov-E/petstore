@@ -38,15 +38,22 @@
                         <p class="price">
                             {{ product.price | formatPrice}}
                         </p>
-                        <button class="default"
+                        <button class="btn btn-primary btn-lg"
                             @click="addToCart"
-                            v-if="canAddToCart">
-                            Add to cart
-                        </button>
-                        <button class="disabled"
-                            v-else>
-                            Add to cart
-                        </button>
+                            v-if="canAddToCart">Add to cart</button>
+                        <button disabled="true" class="btn btn-primary btn-lg"
+                            v-else>Add to cart</button>
+                        <span class="inventory-message"
+                              v-if="product.availableInventory - cartItemCount === 0">
+                              All Out!
+                        </span>
+                        <span class="inventory-message"
+                              v-else-if="product.availableInventory - cartItemCount < 5">
+                              Only {{product.availableInventory - cartItemCount}} left!
+                        </span>
+                        <span class="inventory-message"
+                              v-else>Buy Now!
+                        </span>
                     </div>
                 </div>
                 <div v-else>
@@ -160,6 +167,13 @@
             data: {
                 sitename: 'Vue.js Pet Depot',
                 showProduct: true,
+                states: {
+                  ST: 'Sankt-Peterburg',
+                  MS: 'Moscow',
+                  YE: 'Yekaterinburg',
+                  VO: 'Volgograd',
+                  SA: 'Samara'
+                },
                 order: {
                   firstName: '',
                   lastName: '',
@@ -180,7 +194,7 @@
                     description: "А 25 pound bag of <em>irresistiЬle</em>,"+"organic goodness for your cat.",
                     price: 2000,
                     image: "assets/images/product-fullsize.png",
-                    availableInventory: 5
+                    availableInventory: 10
                 },
                 cart: []
             },
