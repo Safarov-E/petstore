@@ -227,8 +227,8 @@
                 submitForm() {
                   alert("Submitted");
                 },
-                checkRating(n) {
-                  return this.product.rating - n >= 0;
+                checkRating(n, myProduct) {
+                  return myProduct.rating - n >= 0;
                 }
             },
             computed: {
