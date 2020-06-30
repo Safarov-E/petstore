@@ -223,8 +223,8 @@
               checkRating(n, myProduct) {
                 return myProduct.rating - n >= 0;
               },
-              addToCart() {
-                  this.cart.push(this.product.id)
+              addToCart(aProduct) {
+                  this.cart.push(aProduct.id)
               },
               showCheckout() {
                   this.showProduct = this.showProduct ? false : true
