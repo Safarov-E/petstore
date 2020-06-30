@@ -45,10 +45,12 @@
                 <span class="inventory-message" v-else-if="product.availableInventory - cartCount(product.id) < 5">
                   Only {{product.availableInventory - cartCount(product.id)}} left!
                 </span>
-                <span class="inventory-message" v-else>Buy Now!
+                <span class="inventory-message"
+                  v-else>Buy Now!
                 </span>
                 <div class="rating">
-                  <span v-bind:class="{'rating-active' :checkRating(n, product)}" v-for="n in 5">☆
+                  <span :class="{'rating-active': checkRating(n, product)}"
+                        v-for="n in 5">☆
                   </span>
                 </div>
               </div>
@@ -218,25 +220,34 @@
                 }
             },
             methods: {
-                addToCart() {
-                    this.cart.push(this.product.id)
-                },
-                showCheckout() {
-                    this.showProduct = this.showProduct ? false : true
-                },
-                submitForm() {
-                  alert("Submitted");
-                },
-                checkRating(n, myProduct) {
-                  return myProduct.rating - n >= 0;
+              checkRating(n, myProduct) {
+                return myProduct.rating - n >= 0;
+              },
+              addToCart() {
+                  this.cart.push(this.product.id)
+              },
+              showCheckout() {
+                  this.showProduct = this.showProduct ? false : true
+              },
+              submitForm() {
+                alert("Submitted");
+              },
+              cartCount(id) {
+                let count = 0;
+                for(var i = 0; i < this.cart.length; i++) {
+                  if(this.cart[i] === id) {
+                    count++;
+                  }
                 }
+                return count;
+              }
             },
             computed: {
                 cartItemCount() {
                     return this.cart.length || ''
                 },
-                canAddToCart() {
-                    return this.product.availableInventory > this.cartItemCount
+                canAddToCart(aProduct) {
+                    return aProduct.availableInventory > this.cartCount(aProduct.id)
                 }
             },
             created() {
