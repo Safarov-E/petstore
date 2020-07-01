@@ -2,11 +2,11 @@
   <div>
   <my-header :cartItemCount="cartItemCount"></my-header>
   <main>
-    <div v-for="product in sortedProducts">
+    <div v-for="(product, key) in sortedProducts" :key="key">
       <div class="row">
         <div class="col-md-5 col-md-offset-0">
           <figure>
-            <img class="product" v-bind:src="product.image" >
+            <img class="product" :src="product.image" >
           </figure>
         </div>
         <div class="col-md-6 col-md-offset-0 description">
@@ -32,7 +32,7 @@
     </span>
     <div class="rating">
       <span  v-bind:class="{'rating-active' :checkRating(n, product)}"
-      v-for="n in 5" >☆
+      v-for="n in 5" :key="n">☆
     </span>
   </div>
 </div><!-- end of col-md-6-->
@@ -44,6 +44,7 @@
 </template>
 <script>
 import MyHeader from './Header.vue';
+import axios from 'axios'
 export default {
   name: 'imain',
   data() {
@@ -82,17 +83,17 @@ export default {
       return this.cart.length || '';
     },
     sortedProducts() {
-      if (this.products.length > 0) {
-        let productsArray = this.products.slice(0);
         function compare(a, b) {
-          if (a.title.toLowerCase() < b.title.toLowerCase())
-            return -1;
-          if (a.title.toLowerCase() > b.title.toLowerCase())
-            return 1;
-          return 0;
+            if(a.title.toLowerCase() < b.title.toLowerCase()) { return -1; }
+            if(a.title.toLowerCase() > b.title.toLowerCase()) { return 1; } 
+            return 0;
         }
-        return productsArray.sort(compare);
-      }
+        if(this.products.length > 0) {
+            let productsArray = this.products.slice(0);
+        return productsArray.sort(compare)
+        } else {
+            return false
+        }
     }
   },
   filters: {
@@ -115,7 +116,7 @@ export default {
     }
   },
   created: function() {
-    axios.get('/static/products.json').then(response => {
+    axios.get('/products.json').then(response => {
       this.products = response.data.products;
       console.log(this.products);
     });
