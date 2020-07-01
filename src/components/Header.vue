@@ -35,4 +35,7 @@ export default {
     text-decoration: none;
     color: black;
   }
+  .router-link-exact-active {
+    color: blue;
+  }
 </style>
