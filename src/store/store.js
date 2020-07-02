@@ -24,5 +24,8 @@ export const store = new Vuex.Store({
     },
     getters: {
         products: state => state.products
+    },
+    created() {
+        this.$store.dispatch('initStore');
     }
 })
