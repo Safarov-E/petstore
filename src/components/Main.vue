@@ -49,7 +49,7 @@
 </template>
 <script>
 import MyHeader from './Header.vue';
-import axios from 'axios'
+import {mapGetters} from 'vuex';
 export default {
   name: 'imain',
   data() {
@@ -83,6 +83,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'products'
+    ]),
     cartItemCount() {
       return this.cart.length || '';
     },
@@ -122,11 +125,8 @@ export default {
       }
     }
   },
-  created: function() {
-    axios.get('/products.json').then(response => {
-      this.products = response.data.products;
-      console.log(this.products);
-    });
+  created() {
+    this.$store.dispatch('initStore');
   }
 };
 </script>
