@@ -54,7 +54,6 @@ export default {
   name: 'imain',
   data() {
     return {
-      products: {},
       cart: []
     };
   },
@@ -99,6 +98,9 @@ export default {
         } else {
             return false
         }
+    },
+    products() {
+      return this.$store.getters.products;
     }
   },
   filters: {
